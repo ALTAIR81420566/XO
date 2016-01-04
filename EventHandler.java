@@ -1,59 +1,72 @@
+package xo_2;
 
+
+
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class EventHandler {
-
-	
-	
-	public static char XOprinter(char B, JButton button, JLabel label)
+public class EventHandler 
+{
+	public static boolean XOprinter(boolean queue, boolean gameOver, JButton button, JLabel label)
 	{
-	  if(!Main.gameOver)
+	  if(!gameOver)
 	  {
-		if(B == 'n')
+		if(button.getText().equals(""))
 		{
-		  if (Main.queue == true)
+		  if (queue == true)
 		  {
 			  label.setText("Очередь - О");
 			  button.setText("X");
-			B = 'X';
-			Main.queue = false;
+			
+			return false;
 		  }
 	
-		  else if (Main.queue == false)
+		  else 
 		  {
-			  label.setText("Очередь -Х");
+			  label.setText("Очередь - Х");
 			  button.setText("O");
-			B = 'O';
-			Main.queue = true;
+			
+			return true;
 		  }
 		  
 		}
 	  } 
-		return B;
+		return queue;
 	}
-	
-	protected static void gameOver(JFrame frame, JLabel label)
+
+	protected static boolean XO_gameOver(List<JButton> butnArr, JLabel label)
 	{
-		if ((Main.A == 'X' && Main.B == 'X' && Main.C == 'X') || (Main.A == 'X' && Main.E == 'X' && Main.I == 'X') ||
-				(Main.G == 'X' && Main.E == 'X' && Main.C == 'X') || (Main.D == 'X' && Main.E == 'X' && Main.F == 'X') ||
-				(Main.B == 'X' && Main.E == 'X' && Main.H == 'X') || (Main.A == 'X' && Main.D == 'X' && Main.G == 'X') || 
-				(Main.C == 'X' && Main.F == 'X' && Main.I == 'X') || (Main.G == 'X' && Main.H == 'X' && Main.I == 'X'))
+		//assert(butnArr.size() == 9);
+		System.out.println();
+		if((butnArr.get(0).getText().equals("X") && butnArr.get(3).getText().equals("X") && butnArr.get(6).getText().equals("X")) ||
+				(butnArr.get(1).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(7).getText().equals("X")) ||
+				(butnArr.get(2).getText().equals("X") && butnArr.get(5).getText().equals("X") && butnArr.get(8).getText().equals("X")) ||
+				(butnArr.get(0).getText().equals("X") && butnArr.get(1).getText().equals("X") && butnArr.get(2).getText().equals("X")) ||
+				(butnArr.get(3).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(5).getText().equals("X")) ||
+				(butnArr.get(6).getText().equals("X") && butnArr.get(7).getText().equals("X") && butnArr.get(8).getText().equals("X")) ||
+				(butnArr.get(6).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(2).getText().equals("X")) ||
+				(butnArr.get(0).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(8).getText().equals("X")))
 		{
-			
 			label.setText("Выйграл - Х");
-			Main.gameOver = true;
-		}
-		if ((Main.A == 'O' && Main.B == 'O' && Main.C == 'O') || (Main.A == 'O' && Main.E == 'O' && Main.I == 'O') ||
-				(Main.G == 'O' && Main.E == 'O' && Main.C == 'O') || (Main.D == 'O' && Main.E == 'O' && Main.F == 'O') ||
-				(Main.B == 'O' && Main.E == 'O' && Main.H == 'O') || (Main.A == 'O' && Main.D == 'O' && Main.G == 'O') || 
-				(Main.C == 'O' && Main.F == 'O' && Main.I == 'O') || (Main.G == 'O' && Main.H == 'O' && Main.I == 'O'))
-		{
-			
-			label.setText("Выйграл - O");
-			Main.gameOver = true;
-		}
+			return true;
+		} 
+		 else if((butnArr.get(0).getText().equals("O") && butnArr.get(3).getText().equals("O") && butnArr.get(6).getText().equals("O")) ||
+					(butnArr.get(1).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(7).getText().equals("O")) ||
+					(butnArr.get(2).getText().equals("O") && butnArr.get(5).getText().equals("O") && butnArr.get(8).getText().equals("O")) ||
+					(butnArr.get(0).getText().equals("O") && butnArr.get(1).getText().equals("O") && butnArr.get(2).getText().equals("O")) ||
+					(butnArr.get(3).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(5).getText().equals("O")) ||
+					(butnArr.get(6).getText().equals("O") && butnArr.get(7).getText().equals("O") && butnArr.get(8).getText().equals("O")) ||
+					(butnArr.get(6).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(2).getText().equals("O")) ||
+					(butnArr.get(0).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(8).getText().equals("O")))
+			{
+			    label.setText("Выйграл - O");
+				return true;
+			} 
+		       else
+		       {
+		    	   return false;
+		       }
 	}
 }
