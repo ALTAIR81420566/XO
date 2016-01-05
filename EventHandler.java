@@ -36,37 +36,42 @@ public class EventHandler
 		return queue;
 	}
 
-	protected static boolean XO_gameOver(List<JButton> butnArr, JLabel label)
+	protected static String[] mapmaker(String[] map, String actionCommand, String XO)
 	{
-		//assert(butnArr.size() == 9);
-		System.out.println();
-		if((butnArr.get(0).getText().equals("X") && butnArr.get(3).getText().equals("X") && butnArr.get(6).getText().equals("X")) ||
-				(butnArr.get(1).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(7).getText().equals("X")) ||
-				(butnArr.get(2).getText().equals("X") && butnArr.get(5).getText().equals("X") && butnArr.get(8).getText().equals("X")) ||
-				(butnArr.get(0).getText().equals("X") && butnArr.get(1).getText().equals("X") && butnArr.get(2).getText().equals("X")) ||
-				(butnArr.get(3).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(5).getText().equals("X")) ||
-				(butnArr.get(6).getText().equals("X") && butnArr.get(7).getText().equals("X") && butnArr.get(8).getText().equals("X")) ||
-				(butnArr.get(6).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(2).getText().equals("X")) ||
-				(butnArr.get(0).getText().equals("X") && butnArr.get(4).getText().equals("X") && butnArr.get(8).getText().equals("X")))
-		{
-			label.setText("Выйграл - Х");
+		
+		int ac = new Integer(actionCommand);
+		
+		map[ac] = XO;
+		
+		
+		return map;
+		
+	}
+	
+	protected static boolean XO_gameOver(String[] map, JLabel label)
+	{
+		if ((map[0] == "X" && map[3] == "X" && map[6] == "X") || (map[1] == "X" && map[4] == "X" && map[7] == "X")
+				|| (map[2] == "X" && map[5] == "X" && map[8] == "X")
+				|| (map[0] == "X" && map[1] == "X" && map[2] == "X")
+				|| (map[3] == "X" && map[4] == "X" && map[5] == "X")
+				|| (map[6] == "X" && map[7] == "X" && map[8] == "X")
+				|| (map[6] == "X" && map[4] == "X" && map[2] == "X")
+				|| (map[0] == "X" && map[4] == "X" && map[8] == "X")) {
+
+			label.setText("Выйграл - X ");
 			return true;
-		} 
-		 else if((butnArr.get(0).getText().equals("O") && butnArr.get(3).getText().equals("O") && butnArr.get(6).getText().equals("O")) ||
-					(butnArr.get(1).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(7).getText().equals("O")) ||
-					(butnArr.get(2).getText().equals("O") && butnArr.get(5).getText().equals("O") && butnArr.get(8).getText().equals("O")) ||
-					(butnArr.get(0).getText().equals("O") && butnArr.get(1).getText().equals("O") && butnArr.get(2).getText().equals("O")) ||
-					(butnArr.get(3).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(5).getText().equals("O")) ||
-					(butnArr.get(6).getText().equals("O") && butnArr.get(7).getText().equals("O") && butnArr.get(8).getText().equals("O")) ||
-					(butnArr.get(6).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(2).getText().equals("O")) ||
-					(butnArr.get(0).getText().equals("O") && butnArr.get(4).getText().equals("O") && butnArr.get(8).getText().equals("O")))
-			{
-			    label.setText("Выйграл - O");
-				return true;
-			} 
-		       else
-		       {
-		    	   return false;
-		       }
+		} else if ((map[0] == "O" && map[3] == "O" && map[6] == "O")
+				|| (map[1] == "O" && map[4] == "O" && map[7] == "O")
+				|| (map[2] == "O" && map[5] == "O" && map[8] == "O")
+				|| (map[0] == "O" && map[1] == "O" && map[2] == "O")
+				|| (map[3] == "O" && map[4] == "O" && map[5] == "O")
+				|| (map[6] == "O" && map[7] == "O" && map[8] == "O")
+				|| (map[6] == "O" && map[4] == "O" && map[2] == "O")
+				|| (map[0] == "O" && map[4] == "O" && map[8] == "O")) {
+			label.setText("Выйграл - O ");
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

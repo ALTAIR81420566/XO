@@ -19,6 +19,7 @@ public class Main implements ActionListener {
 	private static boolean queue = true;
 	private static boolean gameOver = false;
 	private List<JButton> butnArr = new ArrayList();
+	private String[] map = new String[9];
 	private JFrame frame;
 	private JLabel label = new JLabel("\u041E\u0447\u0435\u0440\u0435\u0434\u044C - X");
 
@@ -135,20 +136,22 @@ public class Main implements ActionListener {
 	
 	protected  void addListener(List<JButton> butnArr)
 	{
-		for(JButton btn : butnArr)
-		{
-			btn.addActionListener(this);
+		for(int i = 0; i < butnArr.size(); i++)
+		{   
+			
+			butnArr.get(i).addActionListener(this);
+			butnArr.get(i).setActionCommand(Integer.toString(i));
 			
 		}
 	}
 
-	
-	public void actionPerformed(ActionEvent e) 
+		public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getActionCommand().equals("Restart"))
 		{
 			queue = true;
 			gameOver = false;
+			map = new String[9];
 			for(JButton btn : butnArr)
 			   {
 				btn.setText("");
@@ -162,7 +165,9 @@ public class Main implements ActionListener {
 			 if(e.getSource().equals(btn))
 			 {
 				queue = EventHandler.XOprinter(queue, gameOver, btn,  label);
-				gameOver = EventHandler.XO_gameOver(butnArr, label);
+				map = EventHandler.mapmaker(map, btn.getActionCommand(), btn.getText());
+				gameOver = EventHandler.XO_gameOver(map, label);
+				
 			 }
 			
 		   }
