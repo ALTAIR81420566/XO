@@ -48,6 +48,7 @@ public class EventHandler
 		
 	}
 	
+	
 	protected static boolean XO_gameOver(String[] map, JLabel label)
 	{
 		if ((map[0] == "X" && map[3] == "X" && map[6] == "X") || (map[1] == "X" && map[4] == "X" && map[7] == "X")
