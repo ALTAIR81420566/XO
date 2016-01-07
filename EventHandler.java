@@ -1,26 +1,27 @@
-package xo_2;
 
 
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class EventHandler 
 {
-	public static boolean XOprinter(boolean queue, boolean gameOver, JButton button, JLabel label)
+	public static boolean XOprinter(boolean side, boolean gameOver, JButton button, JLabel label)
 	{
+		boolean incorrectButton = false;
 	  if(!gameOver)
 	  {
 		if(button.getText().equals(""))
 		{
-		  if (queue == true)
+		  if (side == true)
 		  {
 			  label.setText("Очередь - О");
 			  button.setText("X");
 			
-			return false;
+			
 		  }
 	
 		  else 
@@ -28,14 +29,45 @@ public class EventHandler
 			  label.setText("Очередь - Х");
 			  button.setText("O");
 			
-			return true;
+			
 		  }
 		  
-		}
-	  } 
-		return queue;
+		}else {
+		  incorrectButton = true;
+		  return incorrectButton;
+	  }
+		
+		
+	  }
+		return incorrectButton;
 	}
 
+	protected static String[] compPlayer(boolean incorrectButton, String[] map,boolean side, boolean gameOver, JLabel label, List<JButton> butnArr)
+	{
+		if(!gameOver && incorrectButton == false ){
+			if(side == true){
+				side = false;
+			}else{
+				side = true;
+			}
+			List<Integer> nullElements = new ArrayList<Integer>();
+			for(int i = 0; i < map.length; i++){
+				if(map[i] == null){
+					nullElements.add(i);
+				}
+			}
+			
+			Random rand = new Random();
+			int randIndx = rand.nextInt(nullElements.size());
+			int randEl = nullElements.get(randIndx);
+			XOprinter(side, gameOver, butnArr.get(randEl), label);
+			map = mapmaker(map, butnArr.get(randEl).getActionCommand(),butnArr.get(randEl).getText());
+			System.out.println(randEl);
+		}
+		
+		return map;
+	}
+	
 	protected static String[] mapmaker(String[] map, String actionCommand, String XO)
 	{
 		
